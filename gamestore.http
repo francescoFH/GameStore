@@ -1,0 +1,15 @@
+GET http://localhost:5082/games
+
+###
+GET http://localhost:5082/games/faf919e4-7181-41a0-9c3c-edf5aefb5530
+
+###
+POST http://localhost:5082/games
+Content-Type: application/json
+
+{
+    "name": "",
+    "genre": "Kids and Family",
+    "price": 19.99,
+    "releaseDate": "2011-11-18"
+}
