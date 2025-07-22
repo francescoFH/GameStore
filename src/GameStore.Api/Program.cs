@@ -48,10 +48,38 @@ app.MapPost("/games", (Game game) =>
     games.Add(game);
 
     return Results.CreatedAtRoute(
-        GetGameEndpointName, 
-        new { id = game.Id }, 
+        GetGameEndpointName,
+        new { id = game.Id },
         game);
 })
 .WithParameterValidation();
+
+// PUT /games/122233-434d-43434....
+app.MapPut("/games/{id}", (Guid id, Game updatedGame) =>
+{
+    var existingGame = games.Find(game => game.Id == id);
+
+    if (existingGame is null)
+    {
+        return Results.NotFound();
+    }
+
+    existingGame.Name = updatedGame.Name;
+    existingGame.Genre = updatedGame.Genre;
+    existingGame.Price = updatedGame.Price;
+    existingGame.ReleaseDate = updatedGame.ReleaseDate;
+
+    return Results.NoContent();
+})
+.WithParameterValidation();
+
+// DELETE /games/122233-434d-43434....
+app.MapDelete("/games/{id}", (Guid id) =>
+{
+    games.RemoveAll(game => game.Id == id);
+
+    return Results.NoContent();
+});
+
 
 app.Run();

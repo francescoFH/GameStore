@@ -1,15 +1,29 @@
 GET http://localhost:5082/games
 
 ###
-GET http://localhost:5082/games/faf919e4-7181-41a0-9c3c-edf5aefb5530
+GET http://localhost:5082/games/cf935e68-264b-4868-8673-83c70cbce1cd
 
 ###
 POST http://localhost:5082/games
 Content-Type: application/json
 
 {
-    "name": "",
+    "name": "Test",
     "genre": "Kids and Family",
     "price": 19.99,
     "releaseDate": "2011-11-18"
 }
+
+###
+PUT http://localhost:5082/games/530f9f62-6c7c-4972-8b16-3be5ee6860c1
+Content-Type: application/json 
+
+{
+    "name": "",
+    "genre": "Fighting",
+    "price": 9.99,
+    "releaseDate": "1992-07-15"
+}
+
+###
+DELETE  http://localhost:5082/games/5191a7ff-d81b-4a47-b12e-501be17378b9
