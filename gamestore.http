@@ -1,17 +1,18 @@
 GET http://localhost:5082/games
 
 ###
-GET http://localhost:5082/games/cf935e68-264b-4868-8673-83c70cbce1cd
+GET http://localhost:5082/games/3c4e0419-8bda-49ea-b23d-369f6a14db18
 
 ###
 POST http://localhost:5082/games
 Content-Type: application/json
 
 {
-    "name": "Test",
-    "genre": "Kids and Family",
+    "name": "Minecraft",
+    "genreId": "02f49762-0a06-414d-8f5a-f8d8886d3f3e",
     "price": 19.99,
-    "releaseDate": "2011-11-18"
+    "releaseDate": "2011-11-18",
+    "description": "Minecraft is a sandbox game where players build, explore, and survive in a blocky, procedurally generated world."
 }
 
 ###
@@ -27,3 +28,6 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:5082/games/5191a7ff-d81b-4a47-b12e-501be17378b9
+
+###
+GET http://localhost:5082/genres
