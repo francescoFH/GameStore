@@ -2,7 +2,7 @@ using System;
 
 namespace GameStore.Api.Features.Games.Constants;
 
-public class EndpointNmes
+public static class EndpointNames
 {
-
+    public const string GetGame = nameof(GetGame);
 }
