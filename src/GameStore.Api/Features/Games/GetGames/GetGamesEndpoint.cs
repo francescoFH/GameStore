@@ -1,6 +1,7 @@
+using System;
 using GameStore.Api.Data;
 
-namespace GameStore.Api.Features.Games;
+namespace GameStore.Api.Features.Games.GetGames;
 
 public static class GetGamesEndpoint
 {

@@ -1,9 +1,9 @@
-namespace GameStore.Api.Features.Games;
+namespace GameStore.Api.Features.Games.GetGames;
 
 public record GameSummaryDto(
     Guid Id,
     string Name,
     string Genre,
     decimal Price,
-    DateOnly ReleseDate
+    DateOnly ReleaseDate
 );
