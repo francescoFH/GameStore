@@ -1,16 +1,17 @@
+using System;
 using GameStore.Api.Models;
 
 namespace GameStore.Api.Data;
 
 public class GameStoreData
 {
-    private readonly List<Genre> generes =
+    private readonly List<Genre> genres =
     [
-        new Genre { Id = new Guid("8c9da091-efa4-4a28-a854-1a83a3a9fa84"), Name = "Fighting"},
-        new Genre { Id = new Guid("02f49762-0a06-414d-8f5a-f8d8886d3f3e"), Name = "Kids and Family"},
-        new Genre { Id = new Guid("bced8c13-2da8-444d-95d4-8cba7e56510d"), Name = "Racing"},
-        new Genre { Id = new Guid("92b20d4f-590f-4b1d-9a82-e380d41038e2"), Name = "Roleplaying"},
-        new Genre { Id = new Guid("10dadd46-02c8-45fc-a245-b731e3b25a13"), Name = "Sport"}
+        new Genre { Id = new Guid("4e179397-c3f1-45ec-a271-c26f07ff64f3"), Name = "Fighting"},
+        new Genre { Id = new Guid("b2c3d4e5-f678-90a1-b2c3-d4e5f67890a1"), Name = "Kids and Family" },
+        new Genre { Id = new Guid("c3d4e5f6-7890-a1b2-c3d4-e5f67890a1b2"), Name = "Racing" },
+        new Genre { Id = new Guid("d4e5f678-90a1-b2c3-d4e5-f67890a1b2c3"), Name = "Roleplaying" },
+        new Genre { Id = new Guid("e5f67890-a1b2-c3d4-e5f6-7890a1b2c3d4"), Name = "Sports" }
     ];
 
     private readonly List<Game> games;
@@ -22,27 +23,25 @@ public class GameStoreData
             new Game {
                 Id = Guid.NewGuid(),
                 Name = "Street Fighter II",
-                Genre = generes[0],
+                Genre = genres[0],
                 Price = 19.99m,
                 ReleaseDate = new DateOnly(1992, 7, 15),
-                Description = "Street Fighter II is a 2D arcade fighting game where players battle as global martial artists using unique special moves."
+                Description = "Street Fighter 2, the most iconic fighting game of all time, is back on the Nintendo Switch! The newest iteration of SFII in nearly 10 years, Ultra Street Fighter 2 features all of the classic characters, a host of new single player and multiplayer features, as well as two new fighters: Evil Ryu and Violent Ken!"
             },
             new Game {
                 Id = Guid.NewGuid(),
                 Name = "Final Fantasy XIV",
-                Genre = generes[3],
+                Genre = genres[3],
                 Price = 59.99m,
                 ReleaseDate = new DateOnly(2010, 9, 30),
-                Description = "Final Fantasy XIV is a massively multiplayer online role-playing game (MMORPG) set in a rich fantasy world with epic quests and real-time combat."
-            },
+                Description = "Join over 27 million adventurers worldwide and take part in an epic and ever-changing FINAL FANTASY. Experience an unforgettable story, exhilarating battles, and a myriad of captivating environments to explore." },
             new Game {
                 Id = Guid.NewGuid(),
                 Name = "FIFA 23",
-                Genre = generes[4],
+                Genre = genres[4],
                 Price = 69.99m,
                 ReleaseDate = new DateOnly(2022, 9, 27),
-                Description = "FIFA 23 is a football simulation game featuring realistic gameplay, licensed teams, and various competitive modes."
-            }
+                Description = "FIFA 23 brings The World's Game to the pitch, with HyperMotion2 Technology, men's and women's FIFA World Cup™, women's club teams, cross-play features, and more." }
         ];
     }
 
@@ -61,7 +60,7 @@ public class GameStoreData
         games.RemoveAll(game => game.Id == id);
     }
 
-    public IEnumerable<Genre> GetGenres() => generes;
+    public IEnumerable<Genre> GetGenres() => genres;
 
-    public Genre? GetGenre(Guid id) => generes.Find(genre => genre.Id == id);
+    public Genre? GetGenre(Guid id) => genres.Find(genre => genre.Id == id);
 }

@@ -19,7 +19,7 @@ public static class CreateGameEndpoint
 
             if (genre is null)
             {
-                return Results.BadRequest("Invalid Genre Id");
+                return Results.BadRequest("Invalid Genre id");
             }
 
             var game = new Game
@@ -46,7 +46,5 @@ public static class CreateGameEndpoint
                 ));
         })
         .WithParameterValidation();
-
     }
 }
-
