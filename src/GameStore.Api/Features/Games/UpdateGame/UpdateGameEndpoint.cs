@@ -11,7 +11,7 @@ public static class UpdateGameEndpoint
     )
     {
         // PUT /games/122233-434d-43434....
-        app.MapPut("/games/{id}", (Guid id, UpdateGameDto gameDto) =>
+        app.MapPut("/{id}", (Guid id, UpdateGameDto gameDto) =>
         {
             var existingGame = data.GetGame(id);
 
