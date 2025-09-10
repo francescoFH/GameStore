@@ -1,4 +1,3 @@
-using System;
 using GameStore.Api.Data;
 using GameStore.Api.Features.Games.Constants;
 using GameStore.Api.Models;
@@ -11,7 +10,7 @@ public static class CreateGameEndpoint
         this IEndpointRouteBuilder app)
     {
         // POST /games
-        app.MapPost("/", (CreateGameDto gameDto, GameStoreData data) =>
+        app.MapPost("/", (CreateGameDto gameDto, GameStoreData data, GameDataLogger logger) =>
         {
             var genre = data.GetGenre(gameDto.GenreId);
 
@@ -30,6 +29,8 @@ public static class CreateGameEndpoint
             };
 
             data.AddGame(game);
+
+            logger.PrintGames();
 
             return Results.CreatedAtRoute(
                 EndpointNames.GetGame,

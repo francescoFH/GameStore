@@ -1,4 +1,3 @@
-using System;
 using GameStore.Api.Models;
 
 namespace GameStore.Api.Data;
