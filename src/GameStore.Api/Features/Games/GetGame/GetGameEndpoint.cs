@@ -8,11 +8,10 @@ namespace GameStore.Api.Features.Games.GetGame;
 public static class GetGameEndpoint
 {
     public static void MapGetGame(
-        this IEndpointRouteBuilder app,
-        GameStoreData data)
+        this IEndpointRouteBuilder app)
     {
         // GET /games/122233-434d-43434....
-        app.MapGet("/{id}", (Guid id) =>
+        app.MapGet("/{id}", (Guid id, GameStoreData data) =>
         {
             Game? game = data.GetGame(id);
 
