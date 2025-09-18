@@ -1,4 +1,3 @@
-using System;
 using GameStore.Api.Data;
 
 namespace GameStore.Api.Features.Games.UpdateGame;
@@ -9,28 +8,22 @@ public static class UpdateGameEndpoint
         this IEndpointRouteBuilder app)
     {
         // PUT /games/122233-434d-43434....
-        app.MapPut("/{id}", (Guid id, UpdateGameDto gameDto, GameStoreData data) =>
+        app.MapPut("/{id}", (Guid id, UpdateGameDto gameDto, GameStoreContext dbContext) =>
         {
-            var existingGame = data.GetGame(id);
+            var existingGame = dbContext.Games.Find(id);
 
             if (existingGame is null)
             {
                 return Results.NotFound();
             }
 
-            var genre = data.GetGenre(gameDto.GenreId);
-
-            if (genre is null)
-            {
-                return Results.BadRequest("Invalid Genre id");
-            }
-
             existingGame.Name = gameDto.Name;
-            existingGame.Genre = genre;
-            existingGame.GenreId = genre.Id;
+            existingGame.GenreId = gameDto.GenreId;
             existingGame.Price = gameDto.Price;
             existingGame.ReleaseDate = gameDto.ReleaseDate;
             existingGame.Description = gameDto.Description;
+
+            dbContext.SaveChanges();
 
             return Results.NoContent();
         })
