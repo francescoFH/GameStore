@@ -6,3 +6,4 @@
 **/Migrations
 **.db
 *.db-*
+/Frontend/
