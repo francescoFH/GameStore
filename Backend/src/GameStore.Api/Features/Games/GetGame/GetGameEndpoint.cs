@@ -12,9 +12,15 @@ public static class GetGameEndpoint
         // GET /games/122233-434d-43434....
         app.MapGet("/{id}", (Guid id, GameStoreContext dbContext) =>
         {
-            Game? game = dbContext.Games.Find(id);
+            Task<Game?> findGameTask = dbContext.Games
+                                        .FindAsync(id)
+                                        .AsTask();
 
-            return game is null ? Results.NotFound() : Results.Ok(
+            return findGameTask.ContinueWith(task =>
+            {
+                Game? game = task.Result;
+
+                return game is null ? Results.NotFound() : Results.Ok(
                 new GameDetailsDto(
                     game.Id,
                     game.Name,
@@ -22,8 +28,8 @@ public static class GetGameEndpoint
                     game.Price,
                     game.ReleaseDate,
                     game.Description
-                )
-            );
+                ));
+            });
         })
         .WithName(EndpointNames.GetGame);
     }
