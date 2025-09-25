@@ -1,16 +1,14 @@
-using System;
 using GameStore.Api.Models;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.Api.Data;
 
 public static class DataExtensions
 {
-    public static void InitializeDB(this WebApplication app)
+    public static void InitializeDb(this WebApplication app)
     {
         app.MigrateDb();
-        app.SeedDB();
+        app.SeedDb();
     }
 
     private static void MigrateDb(this WebApplication app)
@@ -21,7 +19,7 @@ public static class DataExtensions
         dbContext.Database.Migrate();
     }
 
-    private static void SeedDB(this WebApplication app)
+    private static void SeedDb(this WebApplication app)
     {
         using var scope = app.Services.CreateScope();
         GameStoreContext dbContext = scope.ServiceProvider

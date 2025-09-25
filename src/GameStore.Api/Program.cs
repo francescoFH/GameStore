@@ -9,9 +9,9 @@ builder.Services.AddSqlite<GameStoreContext>(connString);
 
 var app = builder.Build();
 
-app.Mapgames();
+app.MapGames();
 app.MapGenres();
 
-app.InitializeDB();
+app.InitializeDb();
 
 app.Run();
