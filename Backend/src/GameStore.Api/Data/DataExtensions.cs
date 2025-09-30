@@ -10,6 +10,7 @@ public static class DataExtensions
     {
         await app.MigrateDbAsync();
         await app.SeedDbAsync();
+        app.Logger.LogInformation(27, "The DB is ready!");
     }
 
     private static async Task MigrateDbAsync(this WebApplication app)
