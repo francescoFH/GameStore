@@ -15,22 +15,26 @@ public static class GetGamesEndpoint
             {
                 int skipCount = (request.PageNumber - 1) * request.PageSize;
 
-                List<GameSummaryDto> gamesOnPage = await dbContext.Games
-                                                            .OrderBy(game => game.Name)
-                                                            .Skip(skipCount)
-                                                            .Take(request.PageSize)
-                                                            .Include(game => game.Genre)
-                                                            .Select(game => new GameSummaryDto(
-                                                                game.Id,
-                                                                game.Name,
-                                                                game.Genre!.Name,
-                                                                game.Price,
-                                                                game.ReleaseDate
-                                                            ))
-                                                            .AsNoTracking()
-                                                            .ToListAsync();
+                var filteredGames = dbContext.Games
+                                    .Where(game => string.IsNullOrWhiteSpace(request.Name)
+                                            || EF.Functions.Like(game.Name, $"%{request.Name}%"));
 
-                int totalGames = await dbContext.Games.CountAsync();
+                List<GameSummaryDto> gamesOnPage = await filteredGames
+                                                        .OrderBy(game => game.Name)
+                                                        .Skip(skipCount)
+                                                        .Take(request.PageSize)
+                                                        .Include(game => game.Genre)
+                                                        .Select(game => new GameSummaryDto(
+                                                            game.Id,
+                                                            game.Name,
+                                                            game.Genre!.Name,
+                                                            game.Price,
+                                                            game.ReleaseDate
+                                                        ))
+                                                        .AsNoTracking()
+                                                        .ToListAsync();
+
+                int totalGames = await filteredGames.CountAsync();
                 int totalPages = (int)Math.Ceiling(totalGames / (double)request.PageSize);
 
                 return new GamesPageDto(totalPages, gamesOnPage);
