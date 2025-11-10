@@ -21,6 +21,9 @@ builder.Services.AddHttpLogging(options =>
     options.CombineLogs = true;
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 app.MapGames();
@@ -28,7 +31,11 @@ app.MapGenres();
 
 app.UseHttpLogging();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+}
+else
 {
     app.UseExceptionHandler();
 }
