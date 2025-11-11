@@ -1,6 +1,7 @@
 using GameStore.Api.Data;
 using GameStore.Api.Features.Games;
 using GameStore.Api.Features.Genres;
+using GameStore.Api.FileUpload;
 using GameStore.Api.Shared.ErrorHandling;
 using Microsoft.AspNetCore.HttpLogging;
 
@@ -23,6 +24,9 @@ builder.Services.AddHttpLogging(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHttpContextAccessor()
+                .AddSingleton<FileUploader>();
 
 var app = builder.Build();
 
