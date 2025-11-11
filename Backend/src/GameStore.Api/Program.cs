@@ -30,6 +30,8 @@ builder.Services.AddHttpContextAccessor()
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
 app.MapGames();
 app.MapGenres();
 
