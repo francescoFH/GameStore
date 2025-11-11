@@ -1,27 +1,49 @@
 using GameStore.Api.Data;
 using GameStore.Api.Features.Games.Constants;
+using GameStore.Api.FileUpload;
 using GameStore.Api.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GameStore.Api.Features.Games.CreateGame;
 
 public static class CreateGameEndpoint
 {
+    private const string DefaulImageUri = "https://placehold.co/100";
     public static void MapCreateGame(
         this IEndpointRouteBuilder app)
     {
         // POST /games
         app.MapPost("/", async (
-            CreateGameDto gameDto,
+            [FromForm] CreateGameDto gameDto,
             GameStoreContext dbContext,
-            ILogger<Program> logger) =>
+            ILogger<Program> logger,
+            FileUploader fileUploader) =>
         {
-            var game = new Game
+            string imageUri = DefaulImageUri;
+
+            if (gameDto.ImageFile is not null)
+            {
+                var fileUploadResults = await fileUploader.UploadFileAsync(
+                    gameDto.ImageFile,
+                    StorageNames.GameImagesFolder
+                );
+
+                if (!fileUploadResults.IsSuccess)
+                {
+                    return Results.BadRequest(new { message = fileUploadResults.ErrorMessage });
+                }
+
+                imageUri = fileUploadResults.FIleUrl!;
+            }
+
+            Game game = new()
             {
                 Name = gameDto.Name,
                 GenreId = gameDto.GenreId,
                 Price = gameDto.Price,
                 ReleaseDate = gameDto.ReleaseDate,
-                Description = gameDto.Description
+                Description = gameDto.Description,
+                ImageUri = imageUri!
             };
 
             dbContext.Games.Add(game);
@@ -42,7 +64,8 @@ public static class CreateGameEndpoint
                     game.GenreId,
                     game.Price,
                     game.ReleaseDate,
-                    game.Description
+                    game.Description,
+                    game.ImageUri
                 ));
         })
         .WithParameterValidation();
