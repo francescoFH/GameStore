@@ -13,5 +13,6 @@
 **.sqlite
 **.suo
 **.wsuo
+**.vs
 Backend/.vs/Backend/v17/DocumentLayout.json
 /Frontend/
