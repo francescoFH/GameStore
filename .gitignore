@@ -6,4 +6,12 @@
 **/Migrations
 **.db
 *.db-*
+**.bin
+**.v2
+**.vsidx
+.vs/VSWorkspaceState.json
+**.sqlite
+**.suo
+**.wsuo
+Backend/.vs/Backend/v17/DocumentLayout.json
 /Frontend/
