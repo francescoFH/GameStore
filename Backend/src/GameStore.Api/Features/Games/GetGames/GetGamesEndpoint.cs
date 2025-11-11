@@ -1,4 +1,5 @@
 using GameStore.Api.Data;
+using GameStore.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.Api.Features.Games.GetGames;
@@ -15,7 +16,7 @@ public static class GetGamesEndpoint
             {
                 int skipCount = (request.PageNumber - 1) * request.PageSize;
 
-                var filteredGames = dbContext.Games
+                IQueryable<Game> filteredGames = dbContext.Games
                                     .Where(game => string.IsNullOrWhiteSpace(request.Name)
                                             || EF.Functions.Like(game.Name, $"%{request.Name}%"));
 
@@ -29,7 +30,8 @@ public static class GetGamesEndpoint
                                                             game.Name,
                                                             game.Genre!.Name,
                                                             game.Price,
-                                                            game.ReleaseDate
+                                                            game.ReleaseDate,
+                                                            game.ImageUri
                                                         ))
                                                         .AsNoTracking()
                                                         .ToListAsync();
