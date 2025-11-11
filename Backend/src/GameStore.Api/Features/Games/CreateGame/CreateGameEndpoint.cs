@@ -68,6 +68,7 @@ public static class CreateGameEndpoint
                     game.ImageUri
                 ));
         })
-        .WithParameterValidation();
+        .WithParameterValidation()
+        .DisableAntiforgery();
     }
 }
