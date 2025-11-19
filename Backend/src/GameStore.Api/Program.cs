@@ -28,6 +28,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor()
                 .AddSingleton<FileUploader>();
 
+builder.Services.AddAuthentication()
+                .AddJwtBearer();
+
 var app = builder.Build();
 
 app.UseStaticFiles();
