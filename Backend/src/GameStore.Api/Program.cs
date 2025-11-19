@@ -29,7 +29,10 @@ builder.Services.AddHttpContextAccessor()
                 .AddSingleton<FileUploader>();
 
 builder.Services.AddAuthentication()
-                .AddJwtBearer();
+                .AddJwtBearer(options =>
+                {
+                    options.MapInboundClaims = false;
+                });
 
 var app = builder.Build();
 
