@@ -1,4 +1,5 @@
 using GameStore.Api.Data;
+using GameStore.Api.Features.Baskets;
 using GameStore.Api.Features.Games;
 using GameStore.Api.Features.Genres;
 using GameStore.Api.FileUpload;
@@ -40,6 +41,7 @@ app.UseStaticFiles();
 
 app.MapGames();
 app.MapGenres();
+app.MapBaskets();
 
 app.UseHttpLogging();
 
