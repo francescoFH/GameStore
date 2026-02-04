@@ -87,6 +87,7 @@ public static class CreateGameEndpoint
                 ));
         })
         .WithParameterValidation()
-        .DisableAntiforgery();
+        .DisableAntiforgery()
+        .RequireAuthorization();
     }
 }
