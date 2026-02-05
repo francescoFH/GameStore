@@ -37,6 +37,8 @@ public static class GetBasketEndpoint
                 .OrderBy(item => item.Name));
 
             return Results.Ok(dto);
-        });
+        })
+        .RequireAuthorization(builder
+            => builder.RequireClaim("scope", "basket.read"));
     }
 }
