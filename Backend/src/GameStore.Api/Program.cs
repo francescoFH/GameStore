@@ -33,6 +33,7 @@ builder.Services.AddAuthentication()
                 .AddJwtBearer(options =>
                 {
                     options.MapInboundClaims = false;
+                    options.TokenValidationParameters.RoleClaimType = "role";
                 });
 
 builder.Services.AddAuthorizationBuilder();
