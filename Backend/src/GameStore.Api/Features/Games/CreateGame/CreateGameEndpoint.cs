@@ -5,6 +5,7 @@ using GameStore.Api.Data;
 using GameStore.Api.Features.Games.Constants;
 using GameStore.Api.FileUpload;
 using GameStore.Api.Models;
+using GameStore.Api.Shared.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameStore.Api.Features.Games.CreateGame;
@@ -88,6 +89,6 @@ public static class CreateGameEndpoint
         })
         .WithParameterValidation()
         .DisableAntiforgery()
-        .RequireAuthorization();
+        .RequireAuthorization(builder => builder.RequireRole(Roles.Admin));
     }
 }
