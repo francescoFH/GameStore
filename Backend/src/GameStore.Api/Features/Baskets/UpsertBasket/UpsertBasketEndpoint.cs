@@ -1,5 +1,6 @@
 using GameStore.Api.Data;
 using GameStore.Api.Models;
+using GameStore.Api.Shared.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.Api.Features.Baskets.UpsertBasket;
@@ -45,6 +46,7 @@ public static class UpsertBasketEndpoint
             await dbContext.SaveChangesAsync();
 
             return Results.NoContent();
-        });
+        })
+        .RequireAuthorization(Policies.UserAccess);
     }
 }

@@ -4,6 +4,7 @@ using GameStore.Api.Data;
 using GameStore.Api.Features.Games.Constants;
 using GameStore.Api.FileUpload;
 using GameStore.Api.Models;
+using GameStore.Api.Shared.Authorization;
 using GameStore.Api.Shared.FileUpload;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,6 +64,7 @@ public static class UpdateGameEndpoint
             return Results.NoContent();
         })
         .WithParameterValidation()
-        .DisableAntiforgery();
+        .DisableAntiforgery()
+        .RequireAuthorization(Policies.AdminAccess);
     }
 }
