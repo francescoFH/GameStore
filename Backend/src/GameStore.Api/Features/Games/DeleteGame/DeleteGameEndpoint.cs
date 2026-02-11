@@ -1,4 +1,5 @@
 using GameStore.Api.Data;
+using GameStore.Api.Shared.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.Api.Features.Games.DeleteGame;
@@ -16,6 +17,7 @@ public static class DeleteGameEndpoint
                      .ExecuteDeleteAsync();
 
             return Results.NoContent();
-        });
+        })
+        .RequireAuthorization(Policies.AdminAccess);
     }
 }

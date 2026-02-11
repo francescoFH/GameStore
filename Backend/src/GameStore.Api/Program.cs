@@ -3,6 +3,7 @@ using GameStore.Api.Features.Baskets;
 using GameStore.Api.Features.Games;
 using GameStore.Api.Features.Genres;
 using GameStore.Api.FileUpload;
+using GameStore.Api.Shared.Authorization;
 using GameStore.Api.Shared.ErrorHandling;
 using Microsoft.AspNetCore.HttpLogging;
 
@@ -36,7 +37,7 @@ builder.Services.AddAuthentication()
                     options.TokenValidationParameters.RoleClaimType = "role";
                 });
 
-builder.Services.AddAuthorizationBuilder();
+builder.AddGameStoreAuthorization();
 
 var app = builder.Build();
 
